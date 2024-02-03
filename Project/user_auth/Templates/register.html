@@ -11,15 +11,13 @@
         <img src="../static/image/logo.png">
     </div>
     <div class="nav">
-        <div>Home</div>
-        <div>About</div>
-        <div>Mini-Questionare</div>
-      <div> Screener</div>
-        <div class="profile">Profile</div>
-    </div>
+        <a href="{% url 'home' %}"><div>Home</div></a>
+      <div>About</div>
+      <a href="{% url 'financial-details' %}"> <div>Mini-Questionare</div></a>
+        <a href="{% url 'financial_data_screener' %}"><div> Investors Query</div></a>
     <div class="main">
         <h1 class="profil">Profile</h1>
-        
+
         <form action="{% url 'register' %}" method="post" enctype="multipart/form-data" onsubmit="submitForm(event)">
             {% csrf_token %}
             <div class="forma">
@@ -44,7 +42,7 @@
                 <input type="text" placeholder="Introductory Video" name="introductory_video" id="introductory_video" ><br>
 
                 <h2 class="Sdetails">Co-Founder Details</h2>
-                
+
                 <!-- Co-founder table -->
                 <table class="co-founder-table" id="co-founder-table">
                     <caption>Co-Founders</caption>

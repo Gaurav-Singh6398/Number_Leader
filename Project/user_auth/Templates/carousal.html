@@ -11,7 +11,7 @@
 </head>
 <body>
     <div>
-        <img src="../static/image/logo.png">
+        <img src="{% static 'image/logo.png' %}">
     </div>
     <div class="nav">
         <div>Home</div>
@@ -22,7 +22,7 @@
     </div>
     <div class="cas">
     <div class="carousel-container">
-        <div><img src="../static/image/InvestorsQuery.jpeg" alt="Image 1"></div>
+        <a href ="{% url 'financial_data_screener' %}"><div><img src="../static/image/InvestorsQuery.jpeg" alt="Image 1"></div></a>
         <a href ="{% url 'financial-details' %}"><div><img src="../static/image/MiniQuestionare.jpeg" alt="Image 2"></div></a>
         <div><img src="../static/image/MainQuestionare.jpeg" alt="Image 3"></div>
     </div>

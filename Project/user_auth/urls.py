@@ -21,9 +21,4 @@ urlpatterns = [
     # path('financial-data/',include(router.urls)),
     # path('import-excel/', ExcelImportView.as_view(), name='excel-import'),
     path('financial-data/screener/', FinancialDataScreenerView.as_view(), name='financial_data_screener'),
-
-
-
-
-
 ]

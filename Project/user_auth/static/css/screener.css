@@ -15,7 +15,8 @@
 /* Style the navigation bar with a background color */
 .nav {
     display: flex;
-    background-color: #6a88f5; /* Optional: Add a background color to the navigation bar */
+    background-color: #6a88f5;
+    width:100% ;/* Optional: Add a background color to the navigation bar */
 }
 
 /* Style the navigation bar items */
@@ -36,7 +37,7 @@
     flex-direction:row;
 }
 .sidebar{
-    height: 700px;
+    height: fit-content;
     width: 20%;
     border-right: 1px solid black;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -53,6 +54,10 @@
 
 }
 .uquery{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 5px;
     display:inline;
     height:40%;
     width:60%;
@@ -78,6 +83,7 @@
 }
 .sidemain{
     margin-top: 10px;
+    height: fit-content;
 }
 .LALE{
     margin: 20px 5px;
