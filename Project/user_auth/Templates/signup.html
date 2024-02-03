@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/css/signup.css">
+</head>
+<body>
+    <div>
+        <img src="../static/image/logo.png">
+    </div>
+    <div class="nav">
+        <div>Home</div>
+        <div>About</div>
+        <a href="{% url 'financial-details' %}"> <div>Mini-Questionare</div></a>
+<!--        <a href="{% url 'financial_data_screener' %}"><div> Investors Query</div></a>-->
+        <div class="profile">Profile</div>
+    </div>
+    <div class="next">
+        <div class="text">
+            <pre class="co" >
+Are you looking to get Public and Private
+    company information, your startup 
+valuation, Pitch Decks, and other multiple financial
+features for your business in one
+    place.
+You are in the right place. NumberLeader 
+    helps you find everything here
+            </pre>
+        </div>
+        <div class="right">
+            <div class="text2">Login with Social Media or Manually</div>
+                
+                <div class="buttons">
+                    <div class="buttn">
+                    <button class="btn col1" >Login with Facebook</button><br>
+                    <button class="btn col2">Login with Twitter</button><br>
+                    <button class="btn col3">Login with Google+</button><br>
+                    <a href=login.html><button class="btn col2">Login</button></a>
+                    </div>
+               <div class="he">
+                    <form action="" method="POST">
+                    <input type="text" placeholder="Username" name="username" id="username" required><br>
+                    <input type="email" placeholder="Email" name="email" id="email" required><br>
+                    <input type="password" placeholder="Password" id="password" name="password"
+                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required><br>
+                    <input type="password" placeholder="Confirm Password " id="cpassword" name="cpassword"
+                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required><br>
+                    
+                    
+
+                    <button class="btn col4">Register</button>
+                    </form>
+                </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

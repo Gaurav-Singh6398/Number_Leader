@@ -1,0 +1,62 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+/* Style the navigation bar */
+.nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+/* Style the navigation bar with a background color */
+.nav {
+    display: flex;
+    background-color: #6a88f5; /* Optional: Add a background color to the navigation bar */
+}
+
+/* Style the navigation bar items */
+.nav div {
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* Style the profile section */
+.profile {
+    margin-left: auto;
+}
+.main{
+
+    margin-top:20px;
+    width:80%;
+    background-color: #f0f0f0;
+    align-self: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+h1{
+    text-align: center;
+}
+.long{
+    margin-top: 20px;
+    display:flex;
+    justify-content: space-around;
+}
+h2{
+    display:inline-flex;
+}
+#download-button{
+    padding:8px;
+    border-radius: 10px;
+    background: #6a88f5 ;
+    border:none;
+}
+#excel-container{
+    margin-top: 20px;
+    width:95%;
+    align-self: center;
+    margin-left: auto;
+    margin-right: auto;
+
+}

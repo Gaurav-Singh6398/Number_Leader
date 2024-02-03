@@ -1,0 +1,161 @@
+
+/* Reset all padding and margin for all elements */
+* {
+    padding: 0;
+    margin: 0;
+}
+
+/* Style the navigation bar */
+.nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+/* Style the navigation bar with a background color */
+.nav {
+    display: flex;
+    background-color: #f0f0f0; /* Optional: Add a background color to the navigation bar */
+}
+
+/* Style the navigation bar items */
+.nav div {
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* Style the profile section */
+.profile {
+    margin-left: auto;
+}
+
+/* Style the next section */
+.next {
+    display: flex;
+    flex-direction: row;
+}
+
+/* Style the right section */
+.right {
+    display: inline-block;
+    width: 49%;
+    background-color: #f0f0f0;
+    margin: 20px;
+    margin-top: 10px;
+}
+
+/* Style the text section */
+.text {
+    display: inline-block;
+    background-color: blueviolet;
+    color: white;
+    font-weight: 1000;
+    font-size: 22px;
+    margin: 41px;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Style the data section */
+.data {
+    background: white;
+    height: 800px;
+    width: 100%;
+}
+
+/* Style the text2 section */
+.text2 {
+    color: black;
+    font-weight: 500;
+    font-size: 20px;
+    text-align: center;
+    font-weight: 1000;
+    margin-top: 60px;
+}
+
+
+.buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    
+    margin-top: 20px;
+     /* Specify border color */
+    
+}
+.buttn{
+    display:inline-block;
+    width:35%;
+    height:100%;
+    border-right: 1px solid black; /* Specify border style */
+    border-color: rgb(24, 23, 23);
+    margin-bottom: 0px;
+    
+}
+
+/* Style the button */
+.or{
+    display: inline-block;
+    position:absolute;
+    margin-left:49%;
+
+
+}
+.btn {
+    padding: 10px;
+    margin: 5px;
+    border: 0px;
+    width: 170px;
+    text-align: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+
+/* Style the column sections */
+.col1 {
+    background: blue;
+    color: white;
+}
+
+.col2 {
+    background: blueviolet;
+    color: white;
+}
+
+.col3 {
+    background: red;
+    color: white;
+}  
+.he{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 49%;
+    margin-left:10px;
+}
+h2{
+    margin-bottom:7px;
+}
+.he label {
+    margin-bottom: 5px;
+}
+
+/* Remove space between inputs */
+.he input {
+    margin-bottom: 5px;
+    width:90%;
+    padding:10px;
+    border: none; /* Remove the default border */
+ 
+}
+.col4 {
+    background: rgb(10, 197, 10);
+    color: white;
+}
+.lastbtn{
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+    margin:0 50px;
+}

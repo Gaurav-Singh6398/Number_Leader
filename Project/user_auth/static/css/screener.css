@@ -1,0 +1,91 @@
+/* Reset all padding and margin for all elements */
+* {
+    padding: 0;
+    margin: 0;
+}
+
+/* Style the navigation bar */
+.nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #6a88f5;
+}
+
+/* Style the navigation bar with a background color */
+.nav {
+    display: flex;
+    background-color: #6a88f5; /* Optional: Add a background color to the navigation bar */
+}
+
+/* Style the navigation bar items */
+.nav div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #6a88f5;
+    color:white;
+}
+
+/* Style the profile section */
+.profile {
+    margin-left: auto;
+
+}
+.main{
+    display:flex;
+    flex-direction:row;
+}
+.sidebar{
+    height: 700px;
+    width: 20%;
+    border-right: 1px solid black;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.mainshow{
+    display:inline-flex;
+    height: 700px;
+    width: 80%;
+    flex-direction:column;
+
+    justify-content: center;
+    align-items: center;
+
+
+}
+.uquery{
+    display:inline;
+    height:40%;
+    width:60%;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+}
+.samplequery{
+    margin-top: 10px;
+    display:inline;
+    height:40%;
+    width:60%;
+    border-radius: 5px;
+    border: 1px solid black;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.samplequery h3{
+    margin-left:10px;
+}
+.samplequery p{
+    margin-left:10px;
+}
+.sidemain{
+    margin-top: 10px;
+}
+.LALE{
+    margin: 20px 5px;
+
+}
+.button{
+    padding:10px;
+    border-radius:5px;
+    margin-top:10px;
+    align-self:last baseline;
+}

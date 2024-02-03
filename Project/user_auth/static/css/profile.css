@@ -1,0 +1,89 @@
+/* Reset all padding and margin for all elements */
+* {
+    padding: 0;
+    margin: 0;
+}
+
+/* Style the navigation bar */
+.nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #6a88f5;
+}
+
+/* Style the navigation bar with a background color */
+.nav {
+    display: flex;
+    background-color: #6a88f5; /* Optional: Add a background color to the navigation bar */
+}
+
+/* Style the navigation bar items */
+.nav div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #6a88f5;
+    color:white;
+}
+
+/* Style the profile section */
+.profile {
+    margin-left: auto;
+
+}
+.main{
+    background-color: #f0f0f0;
+    margin: 20px 5%;
+     
+}
+
+.profil{
+    text-align: center;
+    margin-bottom:50px;
+    font-size: 60px;
+}
+h2{
+    margin-left: 5px;
+    margin-bottom: 4px;
+    font-size:30px;
+    text-align: center;
+}
+.forma input  {
+    margin-Left:20px;
+    margin-bottom:10px;
+    margin-Top:5px;
+    padding:10px;
+    border-radius: 5px;
+    border:none;
+    width:87%;
+    border-bottom:1px SOLID black;
+ }
+.forma label  {
+    margin-Left:20px;
+    font-size:20px;
+    font-weight:600;
+    margin-bottom:5px;
+    
+ }
+.forma button{
+    margin-Top:10px;
+    padding:12px;
+    margin-Left:20px;
+    border-radius: 10px;
+    margin-bottom:30px;
+    border:none;
+    background-color:#6a88f5;
+    
+}
+.buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+.co-founder-form{
+    margin-bottom:30px;
+    border-bottom: 1px solid black;
+} 
+.finance{
+    text-align: center;
+    margin-bottom:30px;
+}

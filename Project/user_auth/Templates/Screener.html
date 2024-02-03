@@ -1,0 +1,211 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- your_template.html -->
+<link rel="stylesheet" type="text/css" href="{% static 'css/screener.css' %}">
+
+    {% csrf_token %}
+  </head>
+  <body>
+    <div>
+      <img src="../static/image/logo.png" >
+    </div>
+    <div class="nav">
+      <div>Home</div>
+      <div>About</div>
+      <a href="{% url 'financial-details' %}"> <div>Mini-Questionare</div></a>
+        <a href="{% url 'financial_data_screener' %}"><div> Investors Query</div></a>
+      <div class="profile">Profile</div>
+    </div>
+    <div class="donedeal">
+    <div class="main">
+      <div class="sidebar">
+        <div class="sidemain">
+          <label class="LALE"
+            >Keep Industry Naame top of the other criteria and criteria below it
+            will be applied on that industry</label
+          ><br />
+          <label class="LALE">Market capitalisation = Mar Cap Rs.Cr. </label><br />
+          <label class="LALE">Less Than= > </label><br />
+          <label class="LALE"> Greater Than= &lt; </label><br />
+          <label class="LALE">Equals to= = </label><br />
+          <label class="LALE">Industry =Industry</label><br>
+          <label class="LALE">Name = Name</label><br/>
+          <label class="LALE">CMP  = CMP Rs.</label><br/>
+          <label class="LALE">P/E = P/E</label><br/>
+          <label class="LALE">Mar Cap  =Mar Cap Rs.Cr. </label><br/>
+          <label class="LALE">No. of Share =No. of Share</label><br/>
+          <label class="LALE">NP Qtr =NP Qtr Rs.Cr.</label><br/>
+          <label class="LALE">Sales Qtr = Sales Qtr Rs.Cr.</label><br/>
+          <label class="LALE">ROCE  = ROCE %</label><br/>
+          <label class="LALE">Sales  = Sales Rs.Cr.</label><br/>
+          <label class="LALE">Sales per share = Sales per share</label><br/>
+          <label class="LALE">CMP/Sales = CMP/Sales</label><br/>
+          <label class="LALE">CMP / BV = CMP / BV</label><br/>
+          <label class="LALE">BV =BV in Cr</label><br/>
+          <label class="LALE">Ind PE =Ind PE</label><br/>
+          <label class="LALE">Profit growth % =Profit growth %</label><br/>
+          <label class="LALE">EV =EV Rs.Cr.</label><br/>
+          <label class="LALE">CMP/Sales =CMP/Sales</label><br/>
+          <label class="LALE">PAT 12M =PAT 12M Rs.Cr.</label><br/>
+          <label class="LALE">Debt / Eq =Debt / Eq</label><br/>
+          <label class="LALE">CMP / OCF =CMP / OCF</label><br/>
+          <label class="LALE">EV / EBITDA =EV / EBITDA</label><br/>
+
+        </div>
+      </div>
+      <div class="mainshow">
+        <h3>Write your query</h3>
+        <input type="text" name="uquery" class="uquery" id="uquery" />
+        <div class="samplequery">
+          <h3>Sample Query</h3>
+          <p>Industry_=_Food</p>
+          <p>MARCAP_ >_ 500</p>
+        </div>
+
+          <button class="button" onclick="submitQuery()">Submit</button>
+      </div>
+    </div>
+      <div class="result" style="display: none; text-align: center; background-color: #f0f0f0;">
+        <br>
+        <h2 id="resultHeading" style="display: none;text-align: center;">Result :</h2>
+        <br>
+        <div class="showhead">
+
+        </div><br>
+        <div class="showtable" style=" background-color: #f0f0f0;">
+
+        </div>
+        <br>
+      </div>
+    </div>
+  <script>
+  var jsonData; // Declare jsonData as a global variable
+var removedColumns = [];
+
+function submitQuery() {
+    // Get the input value
+    var querys = document.getElementById('uquery').value;
+
+    // Make an API request (replace 'YOUR_API_ENDPOINT' with your actual API endpoint)
+    fetch("{% url 'financial_data_query' %}", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCSRFToken(),
+        },
+        body: JSON.stringify({
+            query: querys
+        }),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        jsonData = data; // Store jsonData as a global variable
+        console.log(jsonData);
+        displayDataInTable(jsonData);
+        // Show the "main" and "result" divs
+        document.querySelector('.main').style.display = 'none';
+        document.querySelector('.result').style.display = 'block';
+        document.getElementById('resultHeading').style.display = 'block';
+
+        // Pass the column names from the first object in jsonData to the toggleColumn function
+        toggleColumn(Object.keys(jsonData[0]));
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+    });
+}
+
+function displayDataInTable(data) {
+    var showtable = document.querySelector('.showtable');
+    var showhead = document.querySelector('.showhead');
+
+    // Remove existing table and buttons, if any
+    showtable.innerHTML = '';
+    showhead.innerHTML = '';
+
+    // Create a table
+    var table = document.createElement('table');
+    table.classList.add('result-table');
+    // Add border to the table
+    table.style.borderCollapse = 'collapse';
+    table.style.width = '100%';
+
+    // Create table head
+    var thead = document.createElement('thead');
+    var headerRow = document.createElement('tr');
+
+    // Use the keys of the first object in the array as headers
+    var keys = Object.keys(data[0]);
+
+    keys.forEach(key => {
+        if (!removedColumns.includes(key)) {
+            var th = document.createElement('th');
+            th.textContent = key;
+            th.style.border = '1px solid #dddddd'; // Add border to header cells
+            th.style.textAlign = 'center'; // Center text
+            headerRow.appendChild(th);
+
+            // Create button for each key and append to showhead div
+            var button = document.createElement('button');
+            button.textContent = key + ' X'; // Add " X" at the end
+            button.classList.add('button');
+            button.onclick = function() {
+                toggleColumn(key);
+            };
+            showhead.appendChild(button);
+        }
+    });
+
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    // Create table body
+    var tbody = document.createElement('tbody');
+    data.forEach(item => {
+        var row = document.createElement('tr');
+        keys.forEach(key => {
+            if (!removedColumns.includes(key)) {
+                var td = document.createElement('td');
+                td.textContent = item[key];
+                td.style.border = '1px solid #dddddd'; // Add border to data cells
+                td.style.textAlign = 'center'; // Center text
+                row.appendChild(td);
+            }
+        });
+        tbody.appendChild(row);
+    });
+
+    table.appendChild(tbody);
+    showtable.appendChild(table);
+}
+
+function toggleColumn(column) {
+    // Toggle the column in the removedColumns array
+    if (removedColumns.includes(column)) {
+        removedColumns = removedColumns.filter(item => item !== column);
+    } else {
+        removedColumns.push(column);
+    }
+
+    // Re-render the table with the updated columns
+    displayDataInTable(jsonData);
+}
+
+function getCSRFToken() {
+    var csrfTokenElement = document.getElementsByName("csrfmiddlewaretoken")[0];
+    return csrfTokenElement.value;
+}
+
+  </script>
+  </body>
+</html>
