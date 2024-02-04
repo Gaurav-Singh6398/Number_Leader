@@ -373,18 +373,23 @@ class FinancialDataScreenerView(APIView):
         return render(request, self.template_name, context)
 
 class CustomUserView(RetrieveUpdateAPIView):
-    queryset=CustomUser.objects.all()
-    serializer_class=CustomUserSerializer
-    permission_classes=[IsAuthenticated]
-    template_name=''
+    queryset = CustomUser.objects.all()
+    serializer_class = CustomUserSerializer
+    permission_classes = [IsAuthenticated]
+    template_name = '#'  
 
-    def get(self,request,*args,**kwargs):
+    def get_object(self):
+        return self.request.user
 
-        additional_context={
-            'custom_data':'Some additional data you want to pass',
+    def get(self, request, *args, **kwargs):
+        user_instance = self.get_object()
+
+        additional_context = {
+            'user_data': self.get_serializer(user_instance).data,
+            'custom_data': 'Some additional data you want to pass',
         }
 
-        return render(request,self.template_name,context=additional_context)
+        return render(request, self.template_name, context=additional_context)    
     
 
 # from django.db.models import Q
