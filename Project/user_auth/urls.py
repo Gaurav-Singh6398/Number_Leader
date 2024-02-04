@@ -1,5 +1,5 @@
 from django.urls import path,include
-from .views import UserRegistrationView,UserLoginView,FinancialDetailsView,home,ForecastedFinancialDetailsView,CalculateMetricsView,DownloadTopCompaniesExcelView,FinancialDataView, FinancialDataScreenerView
+from .views import UserRegistrationView,UserLoginView,FinancialDetailsView,home,ForecastedFinancialDetailsView,CalculateMetricsView,DownloadTopCompaniesExcelView,FinancialDataView, FinancialDataScreenerView,CustomUserView
 # from rest_framework.routers import Defaenv\SultRouter
 
 # router=DefaultRouter()
@@ -21,4 +21,5 @@ urlpatterns = [
     # path('financial-data/',include(router.urls)),
     # path('import-excel/', ExcelImportView.as_view(), name='excel-import'),
     path('financial-data/screener/', FinancialDataScreenerView.as_view(), name='financial_data_screener'),
+    path('custom-user/<int:pk>/',CustomUserView.as_view(),name='custom-user-detail'),
 ]

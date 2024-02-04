@@ -17,7 +17,12 @@ from .forms import ExcelUploadForm  # Import your form
 from django.db import transaction
 from django.views.generic import TemplateView
 import re
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.generics import RetrieveUpdateAPIView
 from rest_framework import generics, status
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import action, api_view, permission_classes
@@ -30,7 +35,7 @@ from django.views import View
 from rest_framework import viewsets
 from .models import CustomUser, FinancialDetails, ForecastedFinancialDetails,FinancialData
 from .serializers import (FinancialDetailsSerializer,
-                          ForecastedFinancialDetailsSerializer, UserSerializer,FinancialDataSerializer,FinancialDataQuerySerializer)
+                          ForecastedFinancialDetailsSerializer, UserSerializer,FinancialDataSerializer,FinancialDataQuerySerializer,CustomUserSerializer)
 
 
 #Register API
@@ -68,9 +73,7 @@ class UserLoginView(APIView):
 
             return redirect(reverse('home'))
         else:
-            print("Authentication failed")
-            return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
-
+            return redirect('login')
 
 
 
@@ -107,7 +110,7 @@ class FinancialDetailsView(TemplateView, generics.CreateAPIView):
 class ForecastedFinancialDetailsView(TemplateView,generics.CreateAPIView):
     template_name='form3.html'
     serializer_class = ForecastedFinancialDetailsSerializer
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
         # Ensure only one ForecastedFinancialDetails record per user
@@ -122,7 +125,7 @@ class ForecastedFinancialDetailsView(TemplateView,generics.CreateAPIView):
 
 
 #Home
-
+@login_required
 def home(request):
     context = {'message': 'Welcome to the Home Page!'}
     return render(request, 'carousal.html', context)
@@ -144,7 +147,14 @@ def home(request):
     #     return Response(serializer.data)
 
 class CalculateMetricsView(APIView):
+    permission_classes = [IsAuthenticated]
     
+    # @method_decorator(csrf_exempt)
+    # def get(self,request):
+
+    #     return render(request,'template')
+    
+    @method_decorator(csrf_exempt)
     def post(self, request):
         metric_requested = request.data.get('metric')
         
@@ -192,7 +202,8 @@ class CalculateMetricsView(APIView):
     
 #Download API:-[input,industry data,ratios derived,output]            
 class DownloadTopCompaniesExcelView(View):
-    
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
         user = request.user
         top_companies = CustomUser.objects.all().annotate(
@@ -293,6 +304,8 @@ class DownloadTopCompaniesExcelView(View):
 
 
 class FinancialDataView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def post(self, request, *args, **kwargs):
         try:
             query = request.data.get('query', '')
@@ -351,14 +364,29 @@ class FinancialDataView(APIView):
 
 
 class FinancialDataScreenerView(APIView):
+    permission_classes = [IsAuthenticated]
+
     template_name = 'Screener.html'
 
     def get(self, request, *args, **kwargs):
         context = {}
         return render(request, self.template_name, context)
 
+class CustomUserView(RetrieveUpdateAPIView):
+    queryset=CustomUser.objects.all()
+    serializer_class=CustomUserSerializer
+    permission_classes=[IsAuthenticated]
+    template_name=''
 
+    def get(self,request,*args,**kwargs):
+
+        additional_context={
+            'custom_data':'Some additional data you want to pass',
+        }
+
+        return render(request,self.template_name,context=additional_context)
     
+
 # from django.db.models import Q
 # #Getting all data
 # class FinancialDataView(APIView):
